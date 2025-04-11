@@ -2,7 +2,11 @@ services:
   - type: web
     name: livequeuemonitor
     env: python
-    buildCommand: pip install --upgrade pip && pip install -r requirements.txt && python manage.py collectstatic --noinput
+    buildCommand: |
+      python -m pip install --upgrade pip
+      pip install crispy-bootstrap4
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
     startCommand: gunicorn queuemanager.wsgi:application
     envVars:
       - key: DJANGO_SECRET_KEY
