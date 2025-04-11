@@ -4,8 +4,8 @@ services:
     env: python
     buildCommand: |
       python -m pip install --upgrade pip
-      pip install crispy-bootstrap4
-      pip install -r requirements.txt
+      python -m pip install setuptools wheel
+      pip install -r requirements.txt --no-cache-dir
       python manage.py collectstatic --noinput
     startCommand: gunicorn queuemanager.wsgi:application
     envVars:
@@ -14,7 +14,9 @@ services:
       - key: DJANGO_DEBUG
         value: false
       - key: PYTHON_VERSION
-        value: 3.11.8
+        value: 3.11.11
       - key: DATABASE_URL
         sync: false
+      - key: PYTHONPATH
+        value: /opt/render/project/src
     autoDeploy: true
