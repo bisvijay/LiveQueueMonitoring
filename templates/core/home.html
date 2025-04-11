@@ -1,57 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Queue Manager - Live Queue Monitoring</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="/">Queue Manager</a>
-        </div>
-    </nav>
+{% extends "core/base.html" %}
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-8 offset-md-2 text-center">
-                <h1 class="display-4 mb-4">Welcome to Queue Manager</h1>
-                <p class="lead mb-4">Your all-in-one solution for real-time queue management</p>
-                <div class="row mt-5">
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">For Service Providers</h5>
-                                <p class="card-text">Manage your queues efficiently and provide better service to your customers.</p>
-                                <a href="#" class="btn btn-primary">Provider Login</a>
-                            </div>
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 text-center">
+            <h1 class="display-4 mb-4">Welcome to Queue Manager</h1>
+            <p class="lead mb-4">Your all-in-one solution for real-time queue management</p>
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">For Service Providers</h5>
+                            <p class="card-text">Manage your queues efficiently and provide better service to your customers.</p>
+                            {% if user.is_authenticated %}
+                                <a href="#" class="btn btn-primary">Manage Services</a>
+                            {% else %}
+                                <a href="{% url 'login' %}" class="btn btn-primary">Provider Login</a>
+                            {% endif %}
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <div class="card-title">For Customers</div>
-                            <div class="card-body">
-                                <h5 class="card-title">Join Queues</h5>
-                                <p class="card-text">Find services and join queues from the comfort of your home.</p>
-                                <a href="#" class="btn btn-primary">Customer Login</a>
-                            </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">For Customers</h5>
+                            <p class="card-text">Join queues from the comfort of your home.</p>
+                            {% if user.is_authenticated %}
+                                <a href="#" class="btn btn-primary">View My Queues</a>
+                            {% else %}
+                                <a href="{% url 'login' %}" class="btn btn-primary">Customer Login</a>
+                            {% endif %}
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Browse Services</h5>
-                                <p class="card-text">Explore available services and their current queue status.</p>
-                                <a href="#" class="btn btn-primary">View Services</a>
-                            </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Browse Services</h5>
+                            <p class="card-text">Explore available services and their current queue status.</p>
+                            <a href="#" class="btn btn-primary">View Services</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
+{% endblock %}
